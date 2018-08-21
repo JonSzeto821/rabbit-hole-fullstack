@@ -11,13 +11,18 @@ const UserSchema = mongoose.Schema({
     email: {
         type: String,
         required: true
-    }
+    },
+    // topicStart: {
+    //     type: String,
+    //     required: true
+    // }
 });
 
 UserSchema.methods.apiRepr = function() {
     return {
         email: this.email || '',
-        id: this._id || ''
+        id: this._id || '',
+        // topicStart: this.topicStart || ''
     };
 };
 

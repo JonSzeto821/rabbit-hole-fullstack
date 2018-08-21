@@ -9,9 +9,9 @@ const router = express.Router();
 
 const jsonParser = bodyParser.json();
 
-const EntryController = require('./entries');
 const UsersController = require('./users');
 const AuthController = require('./auth');
+const ScraperController = require('./scraper');
 
 //Register User
 router.post('/register', jsonParser, UsersController.register);
@@ -24,5 +24,12 @@ router.post('/refresh', passport.authenticate('jwt', {session: false}), AuthCont
 
 //Add Entry
 router.post('/add', [passport.authenticate('jwt', {session: false}), jsonParser],UsersController.addEntry);
+
+//GET Topics
+router.get('/topics', jsonParser, ScraperController.getTopics);
+
+//GET data
+router.get('/get-entries', [passport.authenticate('jwt', {session: false}), jsonParser], ScraperController.getdata);
+
 
 module.exports = {router, basicStrategy, jwtStrategy};
