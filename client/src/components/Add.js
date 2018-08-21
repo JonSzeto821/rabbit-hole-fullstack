@@ -34,11 +34,11 @@ export class Add extends React.Component {
             );
         }
 
-        if (!this.props.loggedIn) {
-            return <Redirect to="/" />;
-        }
+        // if (!this.props.loggedIn) {
+        //     return <Redirect to="/" />;
+        // }
 
-        return (
+        return ( //modify form to input wikipedia info
             <form
                 className="login-form"
                 onSubmit={this.props.handleSubmit(values =>
