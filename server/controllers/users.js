@@ -145,18 +145,28 @@ exports.addEntry = function(req, res, next) {
                           console.log('banana', $(`a`).html());
                           // console.log($('#mw-content-text').find('a').length); //works //output => 123
 
-                          let links = [];
+                          let links = [].sort();
                           
                           $('a').each(function(){ 
                             // console.log('THIS.ATTR(HREF)', $(this).attr('href'));
                             let str = $(this).attr('href');
-                            console.log('apple', str, typeof str);
-                            if(str && str.includes('/wiki/')){
+                            // console.log('apple', str, typeof str);
+                            if(str && str.includes('/wiki/') && !str.includes(':') && !str.includes('.org') && !str.includes('Main_Page') ){
                                 str = str.substring(str.indexOf("/wiki") + 1);
-                                console.log('str', str);
                                 links.push(str);
-                            }
 
+                                console.log('str', str);
+
+                                // if(!str.includes('/Category:')){
+                                //     links.push(str);
+                                // }
+                                // links.push(str);
+                                // console.log('2nd filter', str);
+
+
+
+                            }
+                            // console.log(links);
                           });
 
                           console.log('section length!@#@#$#$@!$#', $('.mw-parser-output').children().find('a').length); //output => 123
