@@ -141,18 +141,14 @@ exports.addEntry = function(req, res, next) {
         // console.log('cranberry', doc);
         if(!err){
             let url = `https://en.wikipedia.org/wiki/${startTopic}`;
-            console.log('url', url);
+            // console.log('url', url);
             request(url, function(err, resp, html) {
                 if (!err){
                     const $ = cheerio.load(html);
-                    // console.log(html); 
-                    // console.log('banana', $(`a`).html());
-                    // console.log($('#mw-content-text').find('a').length); //works //output => 123
 
                     let links = [].sort();
 
                     $('a').each(function(){ 
-                        // console.log('THIS.ATTR(HREF)', $(this).attr('href'));
                         let str = $(this).attr('href');
                         // console.log('apple', str, typeof str);
                         if(str && str.includes('/wiki/') && !str.includes(':') && !str.includes('.org') && !str.includes('Main_Page') ){
@@ -165,19 +161,21 @@ exports.addEntry = function(req, res, next) {
                     // console.log('section length!@#@#$#$@!$#', $('.mw-parser-output').children().find('a').length); //output => 123
 
                     let keywordArray = [];
+                    let uniqueTopicArray = [];
 
-                    for(let i=0; i < 5; i++){
-                        // console.log('chocolate', i);
+                    for(let i=0; i < 10; i++){
                         let randNum = Math.floor(Math.random() * links.length);
-                        // console.log('caviar', randNum, links.length);
                         let randLink = links[randNum];
-                        // console.log('randNum', randLink)
                         keywordArray.push(randLink);
-
+                        // console.log('keywordArray', keywordArray, typeof keywordArray);
                     }
                     // console.log('keywordArray',keywordArray);
 
-                    keywordArray.forEach(function(link){
+                    // let test = ['1','2','3','3','9'];
+                    uniqueTopicArray = [...new Set(keywordArray)];
+                    // console.log('unique', unique);
+
+                    uniqueTopicArray.slice(0,5).forEach(function(link){
                         let url = `https://en.wikipedia.org/${link}`;
                         // console.log('url',url);
                         request(url, function(err, resp, html) {
@@ -185,9 +183,10 @@ exports.addEntry = function(req, res, next) {
                         })
                     });
 
+
                     return res.json({
                        data: doc,
-                       links: keywordArray
+                       links: uniqueTopicArray
                     });   
                 } 
             });     
