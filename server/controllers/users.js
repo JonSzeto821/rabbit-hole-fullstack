@@ -138,58 +138,55 @@ exports.addEntry = function(req, res, next) {
         console.log('cranberry', doc);
         if(!err){
         
-                    request('https://en.wikipedia.org/wiki/V%C3%A1clav_%C4%8Cern%C3%BD_(footballer)', function(err, resp, html) {
-                        if (!err){
-                          const $ = cheerio.load(html);
-                          // console.log(html); 
-                          console.log('banana', $(`a`).html());
-                          // console.log($('#mw-content-text').find('a').length); //works //output => 123
+            request('https://en.wikipedia.org/wiki/V%C3%A1clav_%C4%8Cern%C3%BD_(footballer)', function(err, resp, html) {
+                if (!err){
+                    const $ = cheerio.load(html);
+                    // console.log(html); 
+                    // console.log('banana', $(`a`).html());
+                    // console.log($('#mw-content-text').find('a').length); //works //output => 123
 
-                          let links = [].sort();
-                          
-                          $('a').each(function(){ 
-                            // console.log('THIS.ATTR(HREF)', $(this).attr('href'));
-                            let str = $(this).attr('href');
-                            // console.log('apple', str, typeof str);
-                            if(str && str.includes('/wiki/') && !str.includes(':') && !str.includes('.org') && !str.includes('Main_Page') ){
-                                str = str.substring(str.indexOf("/wiki") + 1);
-                                links.push(str);
+                    let links = [].sort();
 
-                                console.log('str', str);
+                    $('a').each(function(){ 
+                        // console.log('THIS.ATTR(HREF)', $(this).attr('href'));
+                        let str = $(this).attr('href');
+                        // console.log('apple', str, typeof str);
+                        if(str && str.includes('/wiki/') && !str.includes(':') && !str.includes('.org') && !str.includes('Main_Page') ){
+                            str = str.substring(str.indexOf("/wiki") + 1);
+                            links.push(str);
+                            console.log('str', str);
+                        }
+                    });
 
-                                // if(!str.includes('/Category:')){
-                                //     links.push(str);
-                                // }
-                                // links.push(str);
-                                // console.log('2nd filter', str);
+                    console.log('section length!@#@#$#$@!$#', $('.mw-parser-output').children().find('a').length); //output => 123
 
+                    let keywordArray = [];
 
+                    for(let i=0; i < 5; i++){
+                        // console.log('chocolate', i);
+                        let randNum = Math.floor(Math.random() * links.length);
+                        console.log('caviar', randNum, links.length);
+                        let randLink = links[randNum];
+                        // console.log('randNum', randLink)
+                        keywordArray.push(randLink);
 
-                            }
-                            // console.log(links);
-                          });
+                    }
+                    // console.log('keywordArray',keywordArray);
 
-                          console.log('section length!@#@#$#$@!$#', $('.mw-parser-output').children().find('a').length); //output => 123
-                          
-                          let keywordArray = [];
+                    keywordArray.forEach(function(link){
+                        let url = `https://en.wikipedia.org/${link}`;
+                        // console.log('url',url);
+                        request(url, function(err, resp, html) {
+                            console.log('URL CREATED', url);
+                        })
+                    });
 
-                          for(let i=0; i < 5; i++){
-                            console.log(i);
-                            
-                            keywordArray.push(links[Math.floor(Math.random() * links.length)])
-                          }
-
-                          links.forEach(function(link){
-                            // request(`https://en.wikipedia.org${links}`, function(err, resp, html) {
-                          });
-
-                          return res.json({
-                               data: doc,
-                               links: keywordArray
-
-                            });   
-                      } 
-                });     
+                    return res.json({
+                       data: doc,
+                       links: keywordArray
+                    });   
+                } 
+            });     
         }
     });
     
