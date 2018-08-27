@@ -32,6 +32,7 @@ export class Add extends React.Component {
 
     render() {
         let error;
+        console.log('soda', this);
         if (this.props.error) {
             error = (
                 <div className="form-error" aria-live="polite">
@@ -60,48 +61,45 @@ export class Add extends React.Component {
                                     <Field name="mood" component="input" type="radio" value="happy" />
                                     {' '}
                                     happy
-                                </label>
-                                  <label>
-                                    <Field name="mood" component="input" type="radio" value="nervous" />
-                                    {' '}
-                                    nervous
-                                  </label>
-                
-                                  <p>Activity</p>
-                                <label>
-                                    <Field name="activity" component="input" type="radio" value="work" />
-                                    {' '}
-                                    work
-                                </label>
-                                  <label>
-                                    <Field name="activity" component="input" type="radio" value="video games" />
-                                    {' '}
-                                    video games
-                                  </label>
-                                  <br />
-                                  <br />
-                                  <label htmlFor="journal">Journal</label>
-                                  <br />
-                                    <Field name="journal" component="textarea" type="textarea" />
-                                <br />*/}
+                        </label>
+                          <label>
+                            <Field name="mood" component="input" type="radio" value="nervous" />
+                            {' '}
+                            nervous
+                          </label>
+        
+                          <p>Activity</p>
+                        <label>
+                            <Field name="activity" component="input" type="radio" value="work" />
+                            {' '}
+                            work
+                        </label>
+                          <label>
+                            <Field name="activity" component="input" type="radio" value="video games" />
+                            {' '}
+                            video games
+                          </label>
+                          <br />
+                          <br />
+                          <label htmlFor="journal">Journal</label>
+                          <br />
+                            <Field name="journal" component="textarea" type="textarea" />
+                        <br />*/}
                 <label htmlFor="startPage">StartPage</label>
                   <br />
-                    <Field name="startPage" component="textarea" type="textarea" />
+                    <Field name="startPage" component="input" type="input" />
                     <br />
                 {/*<div>
-                                  <Field
-                                    name="numberCycles"
-                                    component="input"
-                                    type="String"
-                                  />
-                                </div>
-                
-                
-                
-                                <label htmlFor="endPage">endPage</label>
-                                  <br />
-                                    <Field name="endPage" component="textarea" type="textarea" />
-                                    <br />*/}
+                    <Field
+                        name="numberCycles"
+                        component="input"
+                        type="String"
+                    />
+                </div>
+                <label htmlFor="endPage">endPage</label>
+                  <br />
+                    <Field name="endPage" component="textarea" type="textarea" />
+                    <br />*/}
                 <button disabled={this.props.pristine || this.props.submitting}>
                     Submit
                 </button>

@@ -131,14 +131,18 @@ exports.register = function(req, res, next) {
 
 //Add Entry
 exports.addEntry = function(req, res, next) {
-    console.log('sweet potato', req.body);//
+    console.log('sweet potato', req.body, req.body.history.startPage);
     let entry = new Entry(req.body);
+    let startTopic = req.body.history.startPage;
+    console.log('startTopic', startTopic);
+
     entry['userId'] = req.user.id;
     entry.save(function(err, doc){
-        console.log('cranberry', doc);
+        // console.log('cranberry', doc);
         if(!err){
-        
-            request('https://en.wikipedia.org/wiki/V%C3%A1clav_%C4%8Cern%C3%BD_(footballer)', function(err, resp, html) {
+            let url = `https://en.wikipedia.org/wiki/${startTopic}`;
+            console.log('url', url);
+            request(url, function(err, resp, html) {
                 if (!err){
                     const $ = cheerio.load(html);
                     // console.log(html); 
@@ -154,18 +158,18 @@ exports.addEntry = function(req, res, next) {
                         if(str && str.includes('/wiki/') && !str.includes(':') && !str.includes('.org') && !str.includes('Main_Page') ){
                             str = str.substring(str.indexOf("/wiki") + 1);
                             links.push(str);
-                            console.log('str', str);
+                            // console.log('str', str);
                         }
                     });
 
-                    console.log('section length!@#@#$#$@!$#', $('.mw-parser-output').children().find('a').length); //output => 123
+                    // console.log('section length!@#@#$#$@!$#', $('.mw-parser-output').children().find('a').length); //output => 123
 
                     let keywordArray = [];
 
                     for(let i=0; i < 5; i++){
                         // console.log('chocolate', i);
                         let randNum = Math.floor(Math.random() * links.length);
-                        console.log('caviar', randNum, links.length);
+                        // console.log('caviar', randNum, links.length);
                         let randLink = links[randNum];
                         // console.log('randNum', randLink)
                         keywordArray.push(randLink);

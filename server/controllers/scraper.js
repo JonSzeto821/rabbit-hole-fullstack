@@ -6,7 +6,7 @@ exports.getTopics = function(req, res, next) {
 
 	console.log('GET TOPICS', req.body);
    
-	request('https://en.wikipedia.org/wiki/Frenkie_de_Jong', function(err, resp, html) {
+	request('https://en.wikipedia.org/wiki/Bézier_curve', function(err, resp, html) {
 	        if (!err){
 	          const $ = cheerio.load(html);
 	          // console.log(html); 
