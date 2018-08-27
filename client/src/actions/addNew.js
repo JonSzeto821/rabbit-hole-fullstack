@@ -8,6 +8,7 @@ export const sendEntry = (entry) => (dispatch, getState) => {
     const authToken = getState().auth.authToken;
     console.log(authToken);
     console.log(entry);
+    let test = {test: 'test'};
     return fetch(`${API_BASE_URL}/add`, {
         method: 'POST',
         body: JSON.stringify(entry),
@@ -20,7 +21,11 @@ export const sendEntry = (entry) => (dispatch, getState) => {
     })
     .then((response) => {
         console.log(response);
+        return response.json()
 //         // socket.emit('add entry', entries);
 
       })
+    .then((json) => {
+        console.log(json); //logs entry in client console
+    })
 }

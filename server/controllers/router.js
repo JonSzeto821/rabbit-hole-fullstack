@@ -23,7 +23,7 @@ router.post('/login', passport.authenticate('basic', {session: false}), AuthCont
 router.post('/refresh', passport.authenticate('jwt', {session: false}), AuthController.refresh);
 
 //Add Entry
-router.post('/add', [passport.authenticate('jwt', {session: false}), jsonParser],UsersController.addEntry);
+router.post('/add', [passport.authenticate('jwt', {session: false}), jsonParser], UsersController.addEntry);
 
 //GET Topics
 router.get('/topics', jsonParser, ScraperController.getTopics);

@@ -18,7 +18,13 @@ export class Add extends React.Component {
         let submission = {
             journal: values.journal,
             mood: values.mood,
-            activity: values.activity
+            activity: values.activity,
+            // time: values.time,
+            history: {
+                startPage: values.startPage,
+                numberCycles: values.numberCycles,
+                endPage: values.endPage
+            }
         };
         console.log(submission);
         return this.props.dispatch(sendEntry(submission));
@@ -78,6 +84,24 @@ export class Add extends React.Component {
                   <br />
                     <Field name="journal" component="textarea" type="textarea" />
                 <br />
+                <label htmlFor="startPage">StartPage</label>
+                  <br />
+                    <Field name="startPage" component="textarea" type="textarea" />
+                    <br />
+                <div>
+                  <Field
+                    name="numberCycles"
+                    component="input"
+                    type="String"
+                  />
+                </div>
+
+
+
+                <label htmlFor="endPage">endPage</label>
+                  <br />
+                    <Field name="endPage" component="textarea" type="textarea" />
+                    <br />
                 <button disabled={this.props.pristine || this.props.submitting}>
                     Submit
                 </button>

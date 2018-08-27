@@ -1,5 +1,8 @@
 const {User} = require('../models/users');
 const Entry  = require('../models/entries');
+const ScraperController = require('./scraper');
+var request = require('request');
+var cheerio = require('cheerio');
 
 // Post to register a new user
 exports.register = function(req, res, next) {
@@ -128,14 +131,64 @@ exports.register = function(req, res, next) {
 
 //Add Entry
 exports.addEntry = function(req, res, next) {
-    console.log('sweet potato');
+    console.log('sweet potato', req.body);//
     let entry = new Entry(req.body);
     entry['userId'] = req.user.id;
-    entry.save();
-    return res.json({
-       data: 'rosebud'
+    entry.save(function(err, doc){
+        console.log('cranberry', doc);
+        if(!err){
+        
+                    request('https://en.wikipedia.org/wiki/V%C3%A1clav_%C4%8Cern%C3%BD_(footballer)', function(err, resp, html) {
+                        if (!err){
+                          const $ = cheerio.load(html);
+                          // console.log(html); 
+                          console.log('banana', $(`a`).html());
+                          // console.log($('#mw-content-text').find('a').length); //works //output => 123
+
+                          let links = [];
+                          
+                          $('a').each(function(){ 
+                            // console.log('THIS.ATTR(HREF)', $(this).attr('href'));
+                            let str = $(this).attr('href');
+                            console.log('apple', str, typeof str);
+                            if(str && str.includes('/wiki/')){
+                                str = str.substring(str.indexOf("/wiki") + 1);
+                                console.log('str', str);
+                                links.push(str);
+                            }
+
+                          });
+
+                          console.log('section length!@#@#$#$@!$#', $('.mw-parser-output').children().find('a').length); //output => 123
+                          
+                          let keywordArray = [];
+
+                          for(let i=0; i < 5; i++){
+                            console.log(i);
+                            
+                            keywordArray.push(links[Math.floor(Math.random() * links.length)])
+                          }
+
+                          links.forEach(function(link){
+                            // request(`https://en.wikipedia.org${links}`, function(err, resp, html) {
+                          });
+
+                          return res.json({
+                               data: doc,
+                               links: keywordArray
+
+                            });   
+                      } 
+                });     
+        }
     });
+    
 };
+
+
+function getWikiKeyword() {
+
+}
 
 
 

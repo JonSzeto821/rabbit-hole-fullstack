@@ -7,7 +7,15 @@ const EntrySchema = new Schema({
     journal: String,
     date: String,
     location: Object,
-    userId: String
+    userId: String,
+    time: String,
+    history: [
+	    {
+	    	startPage: String,
+	    	numberCycles: String,
+	    	endPage: String
+	    }
+    ]
 });
 
 module.exports = mongoose.model('Entry', EntrySchema);

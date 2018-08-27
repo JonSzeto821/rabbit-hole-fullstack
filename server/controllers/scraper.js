@@ -3,6 +3,8 @@ var cheerio = require('cheerio');
 const Entry  = require('../models/entries');
 
 exports.getTopics = function(req, res, next) {
+
+	console.log('GET TOPICS', req.body);
    
 	request('https://en.wikipedia.org/wiki/Frenkie_de_Jong', function(err, resp, html) {
 	        if (!err){
