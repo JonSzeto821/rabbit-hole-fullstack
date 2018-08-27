@@ -56,7 +56,7 @@ export class Add extends React.Component {
                 
                 <p>Welcome back, {this.props.email}</p>
 
-                <p>Mood</p>
+                <p>Enter Topic</p>
                 {/*<label>
                                     <Field name="mood" component="input" type="radio" value="happy" />
                                     {' '}
@@ -85,9 +85,9 @@ export class Add extends React.Component {
                           <br />
                             <Field name="journal" component="textarea" type="textarea" />
                         <br />*/}
-                <label htmlFor="startPage">StartPage</label>
+                <label htmlFor="startPage">Topic</label>
                   <br />
-                    <Field name="startPage" component="input" type="input" />
+                    <Field name="startPage" component="input" placeholder="E.g. Bézier Curve" type="input" />
                     <br />
                 {/*<div>
                     <Field

@@ -146,7 +146,7 @@ exports.addEntry = function(req, res, next) {
                 if (!err){
                     const $ = cheerio.load(html);
 
-                    let links = [].sort();
+                    let links = [];
 
                     $('a').each(function(){ 
                         let str = $(this).attr('href');
@@ -158,10 +158,8 @@ exports.addEntry = function(req, res, next) {
                         }
                     });
 
-                    // console.log('section length!@#@#$#$@!$#', $('.mw-parser-output').children().find('a').length); //output => 123
-
                     let keywordArray = [];
-                    let uniqueTopicArray = [];
+                    let uniqueKeywordArray = [];
 
                     for(let i=0; i < 10; i++){
                         let randNum = Math.floor(Math.random() * links.length);
@@ -169,13 +167,10 @@ exports.addEntry = function(req, res, next) {
                         keywordArray.push(randLink);
                         // console.log('keywordArray', keywordArray, typeof keywordArray);
                     }
-                    // console.log('keywordArray',keywordArray);
 
-                    // let test = ['1','2','3','3','9'];
-                    uniqueTopicArray = [...new Set(keywordArray)];
-                    // console.log('unique', unique);
+                    uniqueKeywordArray = [...new Set(keywordArray)];
 
-                    uniqueTopicArray.slice(0,5).forEach(function(link){
+                    uniqueKeywordArray.slice(0,5).forEach(function(link){
                         let url = `https://en.wikipedia.org/${link}`;
                         // console.log('url',url);
                         request(url, function(err, resp, html) {
@@ -183,10 +178,9 @@ exports.addEntry = function(req, res, next) {
                         })
                     });
 
-
                     return res.json({
                        data: doc,
-                       links: uniqueTopicArray
+                       links: uniqueKeywordArray
                     });   
                 } 
             });     
