@@ -147,6 +147,11 @@ exports.addEntry = function(req, res, next) {
                     const $ = cheerio.load(html);
 
                     let links = [];
+                    let keywordArray = [];
+                    let uniqueKeywordArray = [];
+                    let urlArray = [];
+                    let formattedKeyword = [];
+                    let formattedVal;
 
                     $('a').each(function(){ 
                         let str = $(this).attr('href');
@@ -158,29 +163,38 @@ exports.addEntry = function(req, res, next) {
                         }
                     });
 
-                    let keywordArray = [];
-                    let uniqueKeywordArray = [];
-
                     for(let i=0; i < 10; i++){
                         let randNum = Math.floor(Math.random() * links.length);
                         let randLink = links[randNum];
                         keywordArray.push(randLink);
-                        // console.log('keywordArray', keywordArray, typeof keywordArray);
                     }
-
+                    
                     uniqueKeywordArray = [...new Set(keywordArray)];
-
+                    
                     uniqueKeywordArray.slice(0,5).forEach(function(link){
                         let url = `https://en.wikipedia.org/${link}`;
-                        // console.log('url',url);
                         request(url, function(err, resp, html) {
-                            console.log('URL CREATED', url);
+                            // console.log('URL CREATED', url);
                         })
+                        urlArray.push(url);
+                        return urlArray;
                     });
+                    
+                    //trim uniqueKeywordArray to remove space and convert special char from keywords
+                    uniqueKeywordArray.slice(0,5).forEach(function(str){
+                        formattedVal = str.toLowerCase().replace('wiki/','').split('_').map((s) => s.charAt(0).toUpperCase() + s.substring(1)).join(' '); //update to capitalize first letter each word
+                        formattedKeyword.push(formattedVal);
+                    });
+
+                    // console.log('keywordArray', keywordArray);
+                    // console.log('uniqueKeywordArray', uniqueKeywordArray);
+                    // console.log('urlArray', urlArray);
+                    // console.log('formattedKeyword', formattedKeyword);
 
                     return res.json({
                        data: doc,
-                       links: uniqueKeywordArray
+                       keywords: formattedKeyword,
+                       links: urlArray
                     });   
                 } 
             });     
