@@ -61,6 +61,7 @@ export class App extends React.Component {
                 <br />
                 <InputContainer props={this.props} />
                 <OptionContainer />
+                <OptionContainer />
             </div>
         );
     }
