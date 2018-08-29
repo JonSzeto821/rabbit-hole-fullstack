@@ -8,7 +8,9 @@ export class Dashboard extends React.Component {
         if (!this.props.loggedIn) {
             return;
         }
+
         this.props.dispatch(fetchProtectedData());
+        // console.log('DASHBOARD', this.props.protectedData);
     }
 
     render() {
@@ -16,6 +18,8 @@ export class Dashboard extends React.Component {
         if (!this.props.loggedIn) {
             return <Redirect to="/" />;
         }
+
+        console.log('componentWillMount', this, this.props.protectedData); //this returns sray data; protectedData does not
 
         return (
             <div className="dashboard">

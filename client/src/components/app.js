@@ -1,13 +1,14 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Route, withRouter} from 'react-router-dom';
-
 import HeaderBar from './header-bar';
 import LandingPage from './landing-page';
 import Dashboard from './dashboard';
 import Add from './Add';
 import RegistrationPage from './registration-page';
 import {refreshAuthToken} from '../actions/auth';
+import InputContainer from './input-container/input-container';
+import OptionContainer from './options-container/options-container';
 
 export class App extends React.Component {
     componentDidMount() {
@@ -50,11 +51,16 @@ export class App extends React.Component {
     render() {
         return (
             <div className="app">
-                <HeaderBar />
                 <Route exact path="/" component={LandingPage} />
                 <Route exact path="/dashboard" component={Dashboard} />
                 <Route exact path="/register" component={RegistrationPage} />
                 <Route exact path="/add" component={Add} />
+                <hr />
+                <h3>Start of Components</h3>
+                <HeaderBar />
+                <br />
+                <InputContainer props={this.props} />
+                <OptionContainer />
             </div>
         );
     }

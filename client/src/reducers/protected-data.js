@@ -4,7 +4,7 @@ import {
 } from '../actions/protected-data';
 
 const initialState = {
-    data: '',
+    data: [],
     error: null
 };
 
@@ -27,10 +27,12 @@ const initialState = {
 export default function reducer(state = initialState, action) {
     switch (action.type) {
         case FETCH_PROTECTED_DATA_SUCCESS:
-        console.log(state, action);
+        console.log('pears', state);
+        console.log('watermelon', action.data.slice(0,6), typeof action.data);
+        console.log('oranges', typeof state.data, typeof action.data);
          return {
            ...state,
-          data: action.data,
+          data: action.data.slice(0,6),
           error: null
         };
 

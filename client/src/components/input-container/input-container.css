@@ -1,0 +1,10 @@
+.inputContainer {
+	border: 2px solid red;
+	padding: 5px;
+	margin: 5px;
+}
+
+.inputContainer h2 {
+	margin: 10px auto;
+	text-align: center;
+}

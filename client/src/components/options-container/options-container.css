@@ -1,0 +1,10 @@
+.optionContainer {
+	border: 2px solid green;
+	padding: 5px;
+	margin: 5px;	
+}
+
+.optionContainer h2 {
+	margin: 10px auto;
+	text-align: center;
+}

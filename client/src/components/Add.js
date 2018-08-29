@@ -15,24 +15,26 @@ export class Add extends React.Component {
 
 
     onSubmit(values) {
+        console.log('values', values);
         let submission = {
             // journal: values.journal,
             // mood: values.mood,
             // activity: values.activity,
             // time: values.time,
             history: {
-                startPage: values.startPage,
+                // startInput: values.startInput,
+                startInput: 'test startInput',
                 numberCycles: values.numberCycles,
                 endPage: values.endPage
             }
         };
-        console.log(submission);
+        console.log('submission.history', submission.history.startInput);
         return this.props.dispatch(sendEntry(submission));
     }
 
     render() {
         let error;
-        console.log('soda', this);
+        // console.log('soda', this);
         if (this.props.error) {
             error = (
                 <div className="form-error" aria-live="polite">
@@ -46,64 +48,39 @@ export class Add extends React.Component {
         // }
 
         return ( //modify form to input wikipedia info
-            <form
-                className="login-form"
-                onSubmit={this.props.handleSubmit(values =>
-                    this.onSubmit(values)
-                )}>
-                {error}
-                <br />
-                
-                <p>Welcome back, {this.props.email}</p>
-
-                <p>Enter Topic</p>
-                {/*<label>
-                                    <Field name="mood" component="input" type="radio" value="happy" />
-                                    {' '}
-                                    happy
-                        </label>
-                          <label>
-                            <Field name="mood" component="input" type="radio" value="nervous" />
-                            {' '}
-                            nervous
-                          </label>
-        
-                          <p>Activity</p>
-                        <label>
-                            <Field name="activity" component="input" type="radio" value="work" />
-                            {' '}
-                            work
-                        </label>
-                          <label>
-                            <Field name="activity" component="input" type="radio" value="video games" />
-                            {' '}
-                            video games
-                          </label>
-                          <br />
-                          <br />
-                          <label htmlFor="journal">Journal</label>
-                          <br />
-                            <Field name="journal" component="textarea" type="textarea" />
-                        <br />*/}
-                <label htmlFor="startPage">Topic</label>
-                  <br />
-                    <Field name="startPage" component="input" placeholder="E.g. Bézier Curve" type="input" />
+            <div>
+                <form
+                    className="login-form"
+                    onSubmit={this.props.handleSubmit(values =>
+                        this.onSubmit(values)
+                    )}>
+                    {error}
                     <br />
-                {/*<div>
-                    <Field
-                        name="numberCycles"
-                        component="input"
-                        type="String"
-                    />
-                </div>
-                <label htmlFor="endPage">endPage</label>
-                  <br />
-                    <Field name="endPage" component="textarea" type="textarea" />
-                    <br />*/}
-                <button disabled={this.props.pristine || this.props.submitting}>
-                    Submit
-                </button>
-            </form>
+                    
+                    <p>Welcome back, {this.props.email}</p>
+
+                    <p>Enter Topic</p>
+
+                    <label htmlFor="startInput">Topic</label>
+                      <br />
+                        <Field name="startInput" component="input" placeholder="E.g. Bézier Curve" type="input" />
+                        <br />
+                    <button disabled={this.props.pristine || this.props.submitting}>
+                        Submit
+                    </button>
+                </form>
+
+                {/*(<h1>${submission.history.startInput}</h1>*/}
+
+{/*                <Field
+                    name="startTopic"
+                    component="input"
+                    type="text"
+                    placeholder="E.g. Test Val"
+                    id="startTopic"
+                  />*/}
+
+            </div>
         );
     }
 }
