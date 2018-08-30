@@ -1,6 +1,6 @@
 import React from 'react';
 import Classnames from 'classnames';
-import styles from '../../styles/button.css';
+import styles from './button.css';
 
 export const TYPES = {
 	PRIMARY: 'primary',
@@ -26,17 +26,19 @@ const BaseButton = ({
   type, 
   disabled, 
   buttonType,
-  buttonSize
+  buttonSize,
+  className
 }) => (
   <button
     type={type}
     disabled={disabled}
     onClick={onClick}
-    Classnames={
-      styles.button, 
-      styles[ buttonType ],
-      styles[ buttonSize || SIZES.MEDIUM ]
-    }
+    className={className}
+    // Classnames={
+    //   styles.button, 
+    //   styles[ buttonType ],
+    //   styles[ buttonSize || SIZES.MEDIUM ]
+    // }
   >
     {text}
   </button>
@@ -49,7 +51,7 @@ export const Submit = props => (
   <BaseButton { ...props } buttonType={TYPES.SUBMIT} />
 );
 export const Topic = props => (
-  <BaseButton { ...props } buttonType={TYPES.TOPIC} />
+  <BaseButton { ...props } buttonType={TYPES.TOPIC} id="topic" />
 );
 export const Read = props => (
   <BaseButton { ...props } buttonType={TYPES.READ} />

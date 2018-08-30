@@ -22,8 +22,8 @@ export class Add extends React.Component {
             // activity: values.activity,
             // time: values.time,
             history: {
-                // startInput: values.startInput,
-                startInput: 'test startInput',
+                startInput: values.startInput,
+                // startInput: 'test startInput',
                 numberCycles: values.numberCycles,
                 endPage: values.endPage
             }
@@ -65,7 +65,10 @@ export class Add extends React.Component {
                       <br />
                         <Field name="startInput" component="input" placeholder="E.g. Bézier Curve" type="input" />
                         <br />
-                    <button disabled={this.props.pristine || this.props.submitting}>
+                    <button 
+                        disabled={this.props.pristine || this.props.submitting}
+                        className='submit'
+                    >
                         Submit
                     </button>
                 </form>

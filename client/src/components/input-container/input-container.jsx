@@ -1,5 +1,5 @@
 import React from 'react';
-import * as Button from '../button';
+import * as Button from '../button/button';
 import Add from '../Add.js';
 import './input-container.css';
 

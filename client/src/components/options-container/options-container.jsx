@@ -1,9 +1,10 @@
 import React from 'react';
-import * as Button from '../button';
+import * as Button from '../button/button';
 import './options-container.css';
 import TopicContainer from '../topic-container/topic-container';
 
 const OptionsContainer = props => {
+	console.log('Options', props);
 {/*	let displayMultiple = (i) => {
 		let str = '';
 		for (var i = 0; i < 9; i++) {
@@ -24,78 +25,60 @@ const OptionsContainer = props => {
 		      type='submit' 
 		      onClick={() => {console.log('Topic clicked')}}
 		      buttonSize={Button.SIZES.LARGE}
+		      className='topic'
 		    />
 		    <Button.Topic
 		      text='Topic' 
 		      type='submit' 
 		      onClick={() => {console.log('Topic clicked')}}
 		      buttonSize={Button.SIZES.LARGE}
+		      className='topic'
 		    />
 		    <Button.Topic
 		      text='Topic' 
 		      type='submit' 
 		      onClick={() => {console.log('Topic clicked')}}
 		      buttonSize={Button.SIZES.LARGE}
+		      className='topic'
 		    />
 		    <Button.Topic
 		      text='Topic' 
 		      type='submit' 
 		      onClick={() => {console.log('Topic clicked')}}
 		      buttonSize={Button.SIZES.LARGE}
+		      className='topic'
 		    />
 		    <Button.Topic
 		      text='Topic' 
 		      type='submit' 
 		      onClick={() => {console.log('Topic clicked')}}
 		      buttonSize={Button.SIZES.LARGE}
+		      className='topic'
 		    />
 		    <Button.Topic
 		      text='Topic' 
 		      type='submit' 
 		      onClick={() => {console.log('Topic clicked')}}
 		      buttonSize={Button.SIZES.LARGE}
+		      className='topic'
 		    />
-		    <TopicContainer />
-
-	    	{/*<Button.Primary
-		      text='Primary' 
-		      type='submit' 
-		      onClick={() => {console.log('Primary clicked')}}
-		      buttonSize={Button.SIZES.LARGE}
-		    />
-		    <Button.Submit
-		      text='Submit'
-		      onClick={() => {console.log('Submit clicked')}}
-		      buttonSize={Button.SIZES.MED}
-		    />
-		    <Button.Read
-		      text='Read'
-		      onClick={() => {console.log('Read clicked')}}
-		      buttonSize={Button.SIZES.MED}
-		    />
-		    <Button.Continue
-		      text='Continue' 
-		      type='submit' 
-		      onClick={() => {console.log('Continue clicked')}}
-		      buttonSize={Button.SIZES.LARGE}
-		    />
-		    <Button.Save
-		      text='Save'
-		      onClick={() => {console.log('Save clicked')}}
-		      buttonSize={Button.SIZES.MED}
-		    />*/}
-		</div>    
-		<div>
-			<button
-			onClick={(i) => {
-				let str = '';
-				for (var i = 0; i < 6; i++) {
-					str = str + i;
-				}
+		    <Button.Primary
+				text='Button TEST' 
+				type='submit' 
+				onClick={(i) => {
+					let str = '';
+					for (var i = 0; i < 6; i++) {
+						str = str + i;
+					}
 				console.log(str);
-			}}
-			>Button TEST</button>
-		</div>
+				}}
+				buttonSize={Button.SIZES.LARGE}
+				className='primary'
+		    />
+		</div>    
+		
+		    <TopicContainer />			
+		
     </div>
   );
 };
