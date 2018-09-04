@@ -4,81 +4,30 @@ import './options-container.css';
 import TopicContainer from '../topic-container/topic-container';
 
 const OptionsContainer = props => {
-	console.log('Options', props);
-{/*	let displayMultiple = (i) => {
-		let str = '';
-		for (var i = 0; i < 9; i++) {
-			str = str + i;
-		}
-		return(
-			<div>{str}</div>
-			);
-	};*/}
+	console.log('topicProps', props.topicProps);
+	let topicList = props.topicProps;
 
+	let renderTopics = topicList.map((topic, i) => {
+		let trimmed = topic.replace('wiki/', '');
+		console.log(trimmed);
+
+		return(
+         	<Button.Topic
+				key={i}
+				text={trimmed} 
+				type='submit' 
+				onClick={() => {console.log(`Topic ${i} clicked`)}}
+				// buttonSize={Button.SIZES.LARGE}
+				className='topic'
+			/>
+		);
+	});
 
   return (
     <div className="optionContainer">
-    	<h2>Select an Option (Option Container)</h2>
-	    <div className="btnContainer">
-	    	<Button.Topic
-		      text='Topic' 
-		      type='submit' 
-		      onClick={() => {console.log('Topic clicked')}}
-		      buttonSize={Button.SIZES.LARGE}
-		      className='topic'
-		    />
-		    <Button.Topic
-		      text='Topic' 
-		      type='submit' 
-		      onClick={() => {console.log('Topic clicked')}}
-		      buttonSize={Button.SIZES.LARGE}
-		      className='topic'
-		    />
-		    <Button.Topic
-		      text='Topic' 
-		      type='submit' 
-		      onClick={() => {console.log('Topic clicked')}}
-		      buttonSize={Button.SIZES.LARGE}
-		      className='topic'
-		    />
-		    <Button.Topic
-		      text='Topic' 
-		      type='submit' 
-		      onClick={() => {console.log('Topic clicked')}}
-		      buttonSize={Button.SIZES.LARGE}
-		      className='topic'
-		    />
-		    <Button.Topic
-		      text='Topic' 
-		      type='submit' 
-		      onClick={() => {console.log('Topic clicked')}}
-		      buttonSize={Button.SIZES.LARGE}
-		      className='topic'
-		    />
-		    <Button.Topic
-		      text='Topic' 
-		      type='submit' 
-		      onClick={() => {console.log('Topic clicked')}}
-		      buttonSize={Button.SIZES.LARGE}
-		      className='topic'
-		    />
-		    <Button.Primary
-				text='Button TEST' 
-				type='submit' 
-				onClick={(i) => {
-					let str = '';
-					for (var i = 0; i < 6; i++) {
-						str = str + i;
-					}
-				console.log(str);
-				}}
-				buttonSize={Button.SIZES.LARGE}
-				className='primary'
-		    />
-		</div>    
-		
-		    <TopicContainer />			
-		
+    	<h2>Select an Option (Option Container)</h2> 
+		<div className="btnContainer">{renderTopics}</div>
+		<TopicContainer />
     </div>
   );
 };

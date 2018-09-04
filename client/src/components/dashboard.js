@@ -2,6 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Link, Redirect} from 'react-router-dom';
 import {fetchProtectedData} from '../actions/protected-data';
+import InputContainer from './input-container/input-container';
+import OptionContainer from './options-container/options-container';
 
 export class Dashboard extends React.Component {
     componentDidMount() {
@@ -19,7 +21,7 @@ export class Dashboard extends React.Component {
             return <Redirect to="/" />;
         }
 
-        console.log('componentWillMount', this, this.props.protectedData); //this returns sray data; protectedData does not
+        let topicProps = this.props.protectedData;
 
         return (
             <div className="dashboard">
@@ -27,11 +29,19 @@ export class Dashboard extends React.Component {
                 <div className="dashboard-username">
                     Email: {this.props.email}
                 </div>
-                <div className="dashboard-protected-data">
+{/*                <div className="dashboard-protected-data">
                     Protected data: {this.props.protectedData}
-                </div>
+                </div>*/}
                 <br />
                 <Link to="/add">Add Entry</Link>
+                <h3>Start of Components</h3>
+                <InputContainer 
+                    props={this.props}
+                 />
+                <OptionContainer 
+                    props={this.props}
+                    topicProps={topicProps}
+                />
             </div>
         );
     }
